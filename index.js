@@ -160,18 +160,20 @@ async function WABot() {
         .split("@")[0]
         .slice(2);
 
-      let currentDateTime = new Date();
+      const moment = require("moment-timezone");
 
-      if (currentDateTime.getHours() < 19) {
+      // Create a moment object with the current time in Indian Standard Time (IST)
+      let currentDateTime = moment().tz("Asia/Kolkata");
+
+      if (currentDateTime.hours() < 19) {
         var generatedDate = formatDate(currentDateTime) + "(Today)";
       } else {
-        currentDateTime.setDate(currentDateTime.getDate() + 1);
+        currentDateTime.add(1, "day");
         var generatedDate = formatDate(currentDateTime) + "(Tomorrow)";
       }
 
       function formatDate(date) {
-        const options = { day: "2-digit", month: "long", year: "numeric" };
-        return date.toLocaleDateString("en-US", options);
+        return date.format("MMMM DD, YYYY");
       }
 
       try {
@@ -187,7 +189,7 @@ WABot();
 
 app.use(cors());
 app.use(express.json());
-app.get("/", () => {
+app.get("/", (req, res) => {
   res.status(200).json({ success: true });
 });
 app.get("/new/join", async (req, res) => {
