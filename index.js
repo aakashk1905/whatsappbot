@@ -6,6 +6,8 @@ import {
 } from "@whiskeysockets/baileys";
 import * as fs from "fs";
 import moment from "moment";
+import moments from "moment-timezone";
+
 import express from "express";
 const app = express();
 import cors from "cors";
@@ -160,10 +162,8 @@ async function WABot() {
         .split("@")[0]
         .slice(2);
 
-      const moment = require("moment-timezone");
-
       // Create a moment object with the current time in Indian Standard Time (IST)
-      let currentDateTime = moment().tz("Asia/Kolkata");
+      let currentDateTime = moments().tz("Asia/Kolkata");
 
       if (currentDateTime.hours() < 19) {
         var generatedDate = formatDate(currentDateTime) + "(Today)";
