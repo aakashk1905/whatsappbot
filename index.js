@@ -61,8 +61,7 @@ const sendOtp = async (number, date) => {
 
       newMemberDocument
         .save()
-        .then((savedMember) => {
-        })
+        .then((savedMember) => {})
         .catch((error) => {
           console.error("Error creating new member:", error);
         });
@@ -93,7 +92,6 @@ const yesterdaymiss = async (number) => {
     });
 
     if (!response.ok) throw new Error("Something went Wrong");
-    
   } catch (e) {
     console.log(e);
     throw e;
@@ -120,7 +118,6 @@ const joinnow = async (number) => {
     });
 
     if (!response.ok) throw new Error("Something went Wrong");
-   
   } catch (e) {
     console.log(e);
     throw e;
@@ -190,7 +187,9 @@ WABot();
 
 app.use(cors());
 app.use(express.json());
-
+app.get("/", () => {
+  res.status(200).json({ success: true });
+});
 app.get("/new/join", async (req, res) => {
   const today = moment().startOf("day");
   const yesterday = moment().subtract(1, "day").startOf("day");
