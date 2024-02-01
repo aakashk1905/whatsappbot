@@ -43,7 +43,7 @@ const sendOtp = async (number, date) => {
         phoneNumber: number,
         type: "Template",
         template: {
-          name: "onboard_new",
+          name: "onboard_new_h7",
           languageCode: "en",
           bodyValues: [date],
         },
